@@ -6,12 +6,12 @@ use Illuminate\Http\Response;
 
 trait ApiResponses
 {
-    protected function ok($message, $data)
+    protected function ok($message, $data = [])
     {
         return $this->success($message, $data, Response::HTTP_ACCEPTED);
     }
 
-    protected function success($message, $data, $statusCode = Response::HTTP_ACCEPTED)
+    protected function success($message, $data = [], $statusCode = Response::HTTP_ACCEPTED)
     {
         return response()->json([
             'message' => $message,
