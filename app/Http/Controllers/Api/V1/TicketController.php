@@ -9,13 +9,17 @@ use App\Http\Resources\V1\TicketResource;
 use App\Models\Ticket;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
-class TicketController extends Controller
+class TicketController extends ApiController
 {
     /**
      * Display a listing of the resource.
      */
     public function index(): AnonymousResourceCollection
     {
+        if($this->include('author')) {
+            return TicketResource::collection(Ticket::with('user')->paginate(10));
+        }
+
         return TicketResource::collection(Ticket::paginate(10));
     }
 
@@ -32,6 +36,10 @@ class TicketController extends Controller
      */
     public function show(Ticket $ticket): TicketResource
     {
+        if($this->include('author')) {
+            return new TicketResource($ticket->load('user'));
+        }
+
         return new TicketResource($ticket);
     }
 
