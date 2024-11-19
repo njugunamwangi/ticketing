@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\V1\TicketController;
 use App\Http\Controllers\Api\V1\UserController;
+use App\Http\Controllers\Api\V1\UserTicketsController;
 use App\Http\Controllers\AuthController;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
@@ -12,6 +13,7 @@ Route::middleware('auth:sanctum')
 
         Route::apiResource('tickets', TicketController::class);
         Route::apiResource('users', UserController::class);
+        Route::apiResource('users.tickets', UserTicketsController::class);
 
     });
 
